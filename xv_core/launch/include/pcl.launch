@@ -1,0 +1,61 @@
+<launch>
+    <arg name="input_point_cloud_topic"/>
+    <arg name="nodelet_manager" value="pcl_nodelet_manager"/>
+
+    <node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager)" args="manager" output="screen"/>
+
+    <node pkg="nodelet" type="nodelet" name="pcl_filter_by_x"
+          args="load pcl/PassThrough $(arg nodelet_manager)" output="screen">
+        <remap from="~input" to="$(arg input_point_cloud_topic)"/>
+        <rosparam>
+            filter_field_name: x
+            filter_limit_min: -0.7
+            filter_limit_max: -0.1
+            input_frame: world
+            output_frame: world
+        </rosparam>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="pcl_filter_by_xy"
+          args="load pcl/PassThrough $(arg nodelet_manager)" output="screen">
+        <remap from="~input" to="pcl_filter_by_x/output"/>
+        <rosparam>
+            filter_field_name: y
+            filter_limit_min: -0.4
+            filter_limit_max: 0.4
+            input_frame: world
+            output_frame: world
+        </rosparam>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="pcl_filter_by_xyz"
+          args="load pcl/PassThrough $(arg nodelet_manager)" output="screen">
+        <remap from="~input" to="pcl_filter_by_xy/output"/>
+        <rosparam>
+            filter_field_name: z
+            filter_limit_min: 0.1
+            filter_limit_max: 0.5
+            input_frame: world
+            output_frame: world
+        </rosparam>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="pcl_voxel_grid"
+          args="load pcl/VoxelGrid $(arg nodelet_manager)"
+          output="screen">
+        <remap from="~input" to="pcl_filter_by_xyz/output"/>
+        <rosparam subst_value="true">
+            filter_field_name: ''
+            leaf_size: 0.02
+        </rosparam>
+    </node>
+
+<!--    <node pkg="nodelet" type="nodelet" name="pcl_extract_clusters"-->
+<!--          args="load pcl/EuclideanClusterExtraction $(arg nodelet_manager)">-->
+<!--        <remap from="~input" to="pcl_voxel_grid/output"/>-->
+<!--        <rosparam>-->
+<!--            cluster_tolerance: 0.03-->
+<!--            spatial_locator: 1-->
+<!--        </rosparam>-->
+<!--    </node>-->
+</launch>

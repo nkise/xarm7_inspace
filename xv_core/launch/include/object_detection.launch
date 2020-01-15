@@ -1,0 +1,7 @@
+<launch>
+    <arg name="input_point_cloud_topic" default="/pcl_voxel_grid/output"/>
+
+    <node pkg="xv_core" type="object_detection_node" name="object_detection_node" output="screen">
+        <param name="input_point_cloud_topic" value="$(arg input_point_cloud_topic)"/>
+    </node>
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+    <param name="kinect_description" command="xacro --inorder '$(find xv_description)/urdf/kinect_v2_mounted.urdf.xacro'"/>
+
+    <node name="spawn_kinect"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-urdf -param kinect_description -model kinect_mounted
+                   -z 0.0 -y 1.25 -x 0.0 -Y -1.5707"
+          respawn="false"
+          output="screen"/>
+</launch>

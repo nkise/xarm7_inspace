@@ -1,0 +1,5 @@
+<launch>
+    <include file="$(find xv_viz)/launch/rviz.launch">
+        <arg name="cfg_name" value="motion_planning.rviz"/>
+    </include>
+</launch>

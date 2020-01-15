@@ -1,0 +1,2 @@
+DOF: 7
+joint_names: ['xv_arm_joint1', 'xv_arm_joint2', 'xv_arm_joint3', 'xv_arm_joint4', 'xv_arm_joint5', 'xv_arm_joint6', 'xv_arm_joint7']

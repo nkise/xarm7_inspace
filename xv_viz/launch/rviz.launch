@@ -1,0 +1,7 @@
+<launch>
+    <arg name="cfg_name"/>
+
+    <arg name="cmd_args" value="-d $(find xv_viz)/rviz/$(arg cfg_name)"/>
+
+    <node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false" args="$(arg cmd_args)" output="screen"/>
+</launch>

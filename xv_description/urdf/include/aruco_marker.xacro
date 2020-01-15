@@ -1,0 +1,35 @@
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="aruco_marker">
+    <xacro:include filename="$(find xv_description)/urdf/include/common.xacro"/>
+
+    <xacro:property name="aruco_paper_sheet_length" value="0.297"/>
+    <xacro:property name="aruco_paper_sheet_width" value="0.21"/>
+    <xacro:property name="aruco_square_side_width" value="0.1"/>
+
+    <xacro:macro name="aruco_marker" params="prefix=''">
+        <link name="${prefix}base_link"/>
+
+        <xacro:box_link prefix="${prefix}paper_"
+                        material_name="White"
+                        x="${aruco_paper_sheet_width}"
+                        y="${aruco_paper_sheet_length}"
+                        z="0.001"
+                        mass="0.01"/>
+        <joint name="${prefix}paper_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}paper_base_link"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:box_link prefix="${prefix}square_"
+                        material_name="Black"
+                        x="${aruco_square_side_width}"
+                        y="${aruco_square_side_width}"
+                        z="0.001"
+                        mass="0.01"/>
+        <joint name="${prefix}square_joint" type="fixed">
+            <parent link="${prefix}paper_base_link"/>
+            <child link="${prefix}square_base_link"/>
+            <origin xyz="0 0 0.001" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="xv_gripper">
+    <xacro:include filename="$(find xv_description)/urdf/include/gripper.xacro"/>
+
+    <xacro:gripper prefix="xv_"/>
+</robot>

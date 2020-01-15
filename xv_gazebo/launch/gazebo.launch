@@ -1,0 +1,12 @@
+<launch>
+    <arg name="sim" default="true"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" default="worlds/empty.world"/>
+        <arg name="paused" value="true"/>
+        <arg name="gui" value="true"/>
+    </include>
+
+    <include file="$(find xv_gazebo)/launch/spawn_xv.launch"/>
+    <include file="$(find xv_gazebo)/launch/spawn_kinect.launch"/>
+</launch>

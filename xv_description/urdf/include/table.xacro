@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="xv_table">
+    <xacro:include filename="$(find xv_description)/urdf/include/common.xacro"/>
+
+    <xacro:property name="table_leg_height" value="0.5"/>
+    <xacro:property name="table_leg_radius" value="0.05"/>
+    <xacro:property name="table_thickness" value="0.05"/>
+    <xacro:property name="table_side_length" value="1.0"/>
+
+    <xacro:macro name="table" params="prefix:=''">
+        <link name="${prefix}base_link"/>
+
+        <xacro:box_link prefix="${prefix}top_" x="${table_side_length}" y="${table_side_length}" z="${table_thickness}" mass="20.0"/>
+        <joint name="${prefix}top_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}top_base_link"/>
+            <origin xyz="0 0 ${table_leg_height}" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:cylinder_link prefix="${prefix}leg_1_" radius="${table_leg_radius}" length="${table_leg_height}" mass="5.0"/>
+        <joint name="${prefix}leg_1_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}leg_1_base_link"/>
+            <origin xyz="${table_side_length/2 - table_leg_radius} ${table_side_length/2 - table_leg_radius} 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:cylinder_link prefix="${prefix}leg_2_" radius="${table_leg_radius}" length="${table_leg_height}" mass="5.0"/>
+        <joint name="${prefix}leg_2_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}leg_2_base_link"/>
+            <origin xyz="-${table_side_length/2 - table_leg_radius} -${table_side_length/2 - table_leg_radius} 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:cylinder_link prefix="${prefix}leg_3_" radius="${table_leg_radius}" length="${table_leg_height}" mass="5.0"/>
+        <joint name="${prefix}leg_3_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}leg_3_base_link"/>
+            <origin xyz="${table_side_length/2 - table_leg_radius} -${table_side_length/2 - table_leg_radius} 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:cylinder_link prefix="${prefix}leg_4_" radius="${table_leg_radius}" length="${table_leg_height}" mass="5.0"/>
+        <joint name="${prefix}leg_4_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}leg_4_base_link"/>
+            <origin xyz="-${table_side_length/2 - table_leg_radius} ${table_side_length/2 - table_leg_radius} 0" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+</robot>

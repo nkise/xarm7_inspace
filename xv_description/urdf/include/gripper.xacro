@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="xv_gripper">
+    <xacro:include filename="$(find xv_description)/urdf/include/common.xacro"/>
+
+    <xacro:macro name="gripper" params="prefix:=''">
+        <link name="${prefix}base_link"/>
+
+        <xacro:box_link prefix="${prefix}body_" x="0.075" y="0.1" z="0.12" mass="0.3"/>
+        <joint name="${prefix}top_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}body_base_link"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:box_link prefix="${prefix}left_finger_" x="0.075" y="0.05" z="0.2" mass="0.05"/>
+        <joint name="${prefix}left_finger_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}left_finger_base_link"/>
+            <origin xyz="0 0.065 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:box_link prefix="${prefix}right_finger_" x="0.075" y="0.05" z="0.2" mass="0.05"/>
+        <joint name="${prefix}right_finger_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}right_finger_base_link"/>
+            <origin xyz="0 -0.065 0" rpy="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}left_finger_tip_link"/>
+        <joint name="${prefix}left_finger_tip_joint" type="fixed">
+            <parent link="${prefix}left_finger_base_link"/>
+            <child link="${prefix}left_finger_tip_link"/>
+            <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}right_finger_tip_link"/>
+        <joint name="${prefix}right_finger_tip_joint" type="fixed">
+            <parent link="${prefix}right_finger_base_link"/>
+            <child link="${prefix}right_finger_tip_link"/>
+            <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}between_finger_tips_link"/>
+        <joint name="${prefix}between_finger_tips_joint" type="fixed">
+            <parent link="${prefix}right_finger_tip_link"/>
+            <child link="${prefix}between_finger_tips_link"/>
+            <origin xyz="0 0.065 0" rpy="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}gripping_link"/>
+        <joint name="${prefix}gripping_link_joint" type="fixed">
+            <parent link="${prefix}between_finger_tips_link"/>
+            <child link="${prefix}gripping_link"/>
+            <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+</robot>

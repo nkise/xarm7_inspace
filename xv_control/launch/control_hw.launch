@@ -1,0 +1,17 @@
+<launch>
+    <rosparam file="$(find xv_control)/config/controllers.yaml" command="load"/>
+
+    <node name="controller_spawner"
+          pkg="controller_manager"
+          type="spawner"
+          respawn="false"
+          output="screen"
+          args="joint_state_controller arm_controller"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <param name="kinect_description" command="xacro --inorder '$(find xv_description)/urdf/kinect_v2.urdf.xacro'"/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="kinect_robot_state_publisher" >
+        <remap from="robot_description" to="kinect_description" />
+    </node>
+</launch>

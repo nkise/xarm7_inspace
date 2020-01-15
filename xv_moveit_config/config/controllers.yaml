@@ -1,0 +1,12 @@
+controller_list:
+  - name: "arm_controller"
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    joints:
+      - xv_arm_joint1
+      - xv_arm_joint2
+      - xv_arm_joint3
+      - xv_arm_joint4
+      - xv_arm_joint5
+      - xv_arm_joint6
+      - xv_arm_joint7

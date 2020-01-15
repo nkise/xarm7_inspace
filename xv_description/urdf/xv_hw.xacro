@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="xv">
+    <xacro:include filename="$(find xv_description)/urdf/include/wooden_board.xacro"/>
+    <xacro:include filename="$(find xv_description)/urdf/include/aruco_marker.xacro"/>
+    <xacro:include filename="$(find xv_description)/urdf/include/aruco_marker.gazebo.xacro"/>
+    <xacro:include filename="$(find xv_description)/urdf/include/arm.xacro"/>
+    <xacro:include filename="$(find xarm_gripper)/urdf/xarm_gripper_model.xacro"/>
+
+    <xacro:macro name="xv" params="prefix:=''">
+        <link name="${prefix}base_link"/>
+
+        <xacro:wooden_board prefix="${prefix}wooden_board_"/>
+        <joint name="${prefix}table_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}wooden_board_base_link"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:arm prefix="${prefix}arm_"/>
+        <joint name="${prefix}arm_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}arm_base_link"/>
+            <origin xyz="-0.002 -0.006 ${wooden_board_d + wooden_board_c}" rpy="0 0 ${pi}"/>
+        </joint>
+
+        <xacro:load_gripper attach_to="${prefix}arm_link7" ns=""/>
+
+        <xacro:aruco_marker prefix="${prefix}aruco_marker_0_"/>
+        <xacro:aruco_marker_gazebo prefix="${prefix}aruco_marker_0_" marker_id="0"/>
+        <joint name="${prefix}aruco_marker_0_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}aruco_marker_0_base_link"/>
+            <origin xyz="${wooden_board_b/2 - aruco_paper_sheet_width/2}
+                         ${wooden_board_a/2 - aruco_paper_sheet_length/2}
+                         ${wooden_board_d + wooden_board_c}"
+                    rpy="0 0 0"/>
+        </joint>
+
+        <xacro:aruco_marker prefix="${prefix}aruco_marker_1_"/>
+        <xacro:aruco_marker_gazebo prefix="${prefix}aruco_marker_1_" marker_id="1"/>
+        <joint name="${prefix}aruco_marker_1_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}aruco_marker_1_base_link"/>
+            <origin xyz="${-wooden_board_b/2 + aruco_paper_sheet_width/2}
+                         ${-wooden_board_a/2 + aruco_paper_sheet_length/2}
+                         ${wooden_board_d + wooden_board_c}"
+                    rpy="0 0 0"/>
+        </joint>
+
+        <xacro:aruco_marker prefix="${prefix}aruco_marker_2_"/>
+        <xacro:aruco_marker_gazebo prefix="${prefix}aruco_marker_2_" marker_id="2"/>
+        <joint name="${prefix}aruco_marker_2_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}aruco_marker_2_base_link"/>
+            <origin xyz="${-wooden_board_b/2 + aruco_paper_sheet_width/2}
+                         ${wooden_board_a/2 - aruco_paper_sheet_length/2}
+                         ${wooden_board_d + wooden_board_c}"
+                    rpy="0 0 0"/>
+        </joint>
+
+        <xacro:aruco_marker prefix="${prefix}aruco_marker_3_"/>
+        <xacro:aruco_marker_gazebo prefix="${prefix}aruco_marker_3_" marker_id="3"/>
+        <joint name="${prefix}aruco_marker_3_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}aruco_marker_3_base_link"/>
+            <origin xyz="${wooden_board_b/2 - aruco_paper_sheet_width/2}
+                         ${-wooden_board_a/2 + aruco_paper_sheet_length/2}
+                         ${wooden_board_d + wooden_board_c}"
+                    rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+</robot>

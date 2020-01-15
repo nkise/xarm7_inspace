@@ -1,0 +1,26 @@
+<launch>
+    <arg name="robot_ip" default="192.168.1.204"/>
+    <arg name="ns" default=""/>
+
+    <include file="$(find xv_bringup)/launch/include/xarm_server.launch">
+        <arg name="robot_ip" value="$(arg robot_ip)"/>
+        <arg name="use_moveit" value="true"/>
+        <arg name="ns" value="$(arg ns)"/>
+    </include>
+
+    <include file="$(find xv_description)/launch/xv_hw.launch"/>
+    <arg name="jnt_stat_source" default="[/joint_states]" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="/source_list" subst_value="True">$(arg jnt_stat_source)</rosparam>
+    </node>
+
+    <include file="$(find xv_control)/launch/control_hw.launch"/>
+    <include file="$(find xv_hw_moveit_config)/launch/move_group.launch"/>
+
+    <node pkg="tf"
+          type="static_transform_publisher"
+          name="stp_xv"
+          args="0 0 0 0 0 0 world xv_base_link 100"/>
+
+<!--    <include file="$(find xv_bringup)/launch/include/kinect.launch"/>-->
+</launch>

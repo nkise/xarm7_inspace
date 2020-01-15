@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find xv_description)/urdf/include/inertial.xacro"/>
+
+    <xacro:macro name="box_link" params="prefix:='' material_name:='White' x y z mass">
+        <link name="${prefix}base_link">
+            <xacro:box_inertial_with_origin x="${x}" y="${y}" z="${z}" mass="${mass}">
+                <origin xyz="0 0 ${z/2}" rpy="0 0 0"/>
+            </xacro:box_inertial_with_origin>
+
+            <visual>
+                <geometry>
+                    <box size="${x} ${y} ${z}"/>
+                </geometry>
+                <origin xyz="0 0 ${z/2}" rpy="0 0 0"/>
+                <material name="${material_name}"/>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <box size="${x} ${y} ${z}"/>
+                </geometry>
+                <origin xyz="0 0 ${z/2}" rpy="0 0 0"/>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_link" params="prefix:='' material_name:='White' radius length mass">
+        <link name="${prefix}base_link">
+            <xacro:cylinder_inertial radius="${radius}" length="${length}" mass="${mass}"/>
+
+            <visual>
+                <geometry>
+                    <cylinder radius="${radius}" length="${length}"/>
+                </geometry>
+                <origin xyz="0 0 ${length/2}" rpy="0 0 0"/>
+                <material name="${material_name}"/>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <cylinder radius="${radius}" length="${length}"/>
+                </geometry>
+                <origin xyz="0 0 ${length/2}" rpy="0 0 0"/>
+            </collision>
+        </link>
+    </xacro:macro>
+</robot>

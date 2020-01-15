@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="xv_table">
+    <xacro:include filename="$(find xv_description)/urdf/include/common.xacro"/>
+
+    <xacro:property name="wooden_board_a" value="0.7625"/>
+    <xacro:property name="wooden_board_b" value="1.527"/>
+    <xacro:property name="wooden_board_c" value="0.032"/>
+    <xacro:property name="wooden_board_d" value="0.05"/>
+    <xacro:property name="wooden_board_e" value="0.998"/>
+
+    <xacro:macro name="wooden_board" params="prefix:=''">
+        <material name="${prefix}Wooden">
+            <color rgba="0.75 0.6 0.41 1"/>
+        </material>
+
+        <link name="${prefix}base_link"/>
+
+        <xacro:box_link prefix="${prefix}bottom_"
+                        material_name="${prefix}Wooden"
+                        x="${wooden_board_e}"
+                        y="${wooden_board_a}"
+                        z="${wooden_board_d}"
+                        mass="20.0"/>
+        <joint name="${prefix}bottom_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}bottom_base_link"/>
+            <origin xyz="-0.003 0 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:box_link prefix="${prefix}top_"
+                        material_name="${prefix}Wooden"
+                        x="${wooden_board_b}"
+                        y="${wooden_board_a}"
+                        z="${wooden_board_c}"
+                        mass="20.0"/>
+        <joint name="${prefix}top_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}top_base_link"/>
+            <origin xyz="0 0 ${wooden_board_d}" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+</robot>

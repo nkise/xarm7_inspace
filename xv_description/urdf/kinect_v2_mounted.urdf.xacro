@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="kinect_v2_mounted">
+    <xacro:include filename="$(find xv_description)/urdf/include/kinect_stand.xacro"/>
+    <xacro:include filename="$(find kinect_v2)/urdf/kinect_v2.urdf.xacro"/>
+
+    <xacro:macro name="kinect_v2_mounted" params="prefix:=''">
+        <link name="${prefix}base_link"/>
+
+        <xacro:kinect_stand prefix="${prefix}kinect_stand_"/>
+        <joint name="${prefix}kinect_stand_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}kinect_stand_base_link"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:kinect_v2 parent="${prefix}kinect_stand_leg_base_link">
+            <origin xyz="0.02 0 ${kinect_stand_height}" rpy="0 1.0 0"/>
+        </xacro:kinect_v2>
+    </xacro:macro>
+
+    <xacro:kinect_v2_mounted prefix="kinect_v2_mounted_"/>
+</robot>

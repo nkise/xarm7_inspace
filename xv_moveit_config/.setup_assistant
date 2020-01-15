@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: xv_description
+    relative_path: urdf/xv.urdf.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/xv.srdf
+  CONFIG:
+    author_name: Denys Kotelovych
+    author_email: dkotel@softserveinc.com
+    generated_timestamp: 1578498722

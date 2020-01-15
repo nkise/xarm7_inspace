@@ -1,0 +1,23 @@
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="kinect_stand">
+    <xacro:include filename="$(find xv_description)/urdf/include/common.xacro"/>
+
+    <xacro:property name="kinect_stand_length" value="0.08"/>
+    <xacro:property name="kinect_stand_width" value="0.08"/>
+    <xacro:property name="kinect_stand_height" value="1.8"/>
+
+    <xacro:macro name="kinect_stand" params="prefix=''">
+        <link name="${prefix}base_link"/>
+
+        <xacro:box_link prefix="${prefix}leg_"
+                        material_name="Black"
+                        x="${kinect_stand_length}"
+                        y="${kinect_stand_width}"
+                        z="${kinect_stand_height}"
+                        mass="30"/>
+        <joint name="${prefix}leg_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}leg_base_link"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>
+</robot>

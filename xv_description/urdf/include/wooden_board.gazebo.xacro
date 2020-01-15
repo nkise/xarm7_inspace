@@ -1,0 +1,11 @@
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="wooden_board">
+    <xacro:macro name="wooden_board_gazebo" params="prefix">
+        <gazebo reference="${prefix}bottom_base_link">
+            <material>WoodenBoard/Brown</material>
+        </gazebo>
+
+        <gazebo reference="${prefix}top_base_link">
+            <material>WoodenBoard/Brown</material>
+        </gazebo>
+    </xacro:macro>
+</robot>

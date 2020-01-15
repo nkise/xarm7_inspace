@@ -1,0 +1,24 @@
+<launch>
+    <arg name="robot_ip"/>
+    <arg name="ns" default=""/>
+    <arg name="use_moveit" default="false"/>
+    <arg name="dof" default="7"/>
+
+    <rosparam file="$(find xv_bringup)/config/xarm_params.yaml" command="load"/>
+
+    <remap from="xarm/joint_states" to="joint_states"/>
+    <remap from="xarm/xarm_states" to="xarm_states"/>
+
+    <param name="xarm_robot_ip" type="str" value="$(arg robot_ip)"/>
+    <node name="xarm_driver"
+          pkg="xarm_api"
+          type="xarm_driver_node"
+          output="screen"/>
+
+    <node if="$(arg use_moveit)" name="xarm_traj_controller"
+          pkg="xarm_controller"
+          type="xarm_traj_controller"
+          args="ip=$(arg robot_ip)"
+          respawn="false"
+          output="screen"/>
+</launch>

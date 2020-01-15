@@ -1,0 +1,94 @@
+material ArucoMarkerPaperColor/White
+{
+  technique
+  {
+    pass ambient
+    {
+      ambient 1 1 1 1
+    }
+
+    pass light
+    {
+      diffuse 1 1 1 1
+      specular 0.1 0.1 0.1 1
+      emissive 1.0 1.0 1.0 0.1
+    }
+  }
+}
+
+material ArucoVisualMarker0/Marker
+{
+	technique
+	{
+		pass
+		{
+            ambient 1 1 1 1.0
+            diffuse 1 1 1 1.0
+            specular 0.03 0.03 0.03 1.0
+            emissive 1.0 1.0 1.0 0.1
+
+			texture_unit
+			{
+				texture aruco_0.png
+			}
+		}
+	}
+}
+
+material ArucoVisualMarker1/Marker
+{
+	technique
+	{
+		pass
+		{
+            ambient 1 1 1 1.0
+            diffuse 1 1 1 1.0
+            specular 0.03 0.03 0.03 1.0
+            emissive 1.0 1.0 1.0 0.1
+
+			texture_unit
+			{
+				texture aruco_1.png
+			}
+		}
+	}
+}
+
+
+material ArucoVisualMarker2/Marker
+{
+	technique
+	{
+		pass
+		{
+            ambient 1 1 1 1.0
+            diffuse 1 1 1 1.0
+            specular 0.03 0.03 0.03 1.0
+            emissive 1.0 1.0 1.0 0.1
+
+			texture_unit
+			{
+				texture aruco_2.png
+			}
+		}
+	}
+}
+
+material ArucoVisualMarker3/Marker
+{
+	technique
+	{
+		pass
+		{
+            ambient 1 1 1 1.0
+            diffuse 1 1 1 1.0
+            specular 0.03 0.03 0.03 1.0
+            emissive 1.0 1.0 1.0 0.1
+
+			texture_unit
+			{
+				texture aruco_3.png
+			}
+		}
+	}
+}

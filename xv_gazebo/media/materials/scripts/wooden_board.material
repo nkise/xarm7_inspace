@@ -1,0 +1,14 @@
+material WoodenBoard/Brown
+{
+ technique
+ {
+    pass
+    {
+       lighting on
+
+       ambient 0.3 0.1 0.1 1
+       diffuse 0.75 0.6 0.41 1
+       emissive 0 0 0 1
+    }
+ }
+}

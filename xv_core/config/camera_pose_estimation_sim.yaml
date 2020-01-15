@@ -1,0 +1,12 @@
+marker_ids: [0, 1, 2, 3]
+marker_frame_ids: [
+  "xv_aruco_marker_0_square_base_link",
+  "xv_aruco_marker_1_square_base_link",
+  "xv_aruco_marker_2_square_base_link",
+  "xv_aruco_marker_3_square_base_link"
+]
+robot_frame_id: "xv_base_link"
+fixed_frame_id: "world"
+camera_base_frame_id: "kinect_v2_mounted_base_link"
+camera_optical_frame_id: "kinect2_rgb_optical_frame"
+fiducials_used_for_transform_count: 20

@@ -1,0 +1,5 @@
+<launch>
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch">
+        <arg name="calib_path" value="$(find xv_bringup)/config/kinect_calibration/"/>
+    </include>
+</launch>

@@ -1,0 +1,12 @@
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="aruco_marker">
+    <xacro:macro name="aruco_marker_gazebo" params="prefix marker_id">
+        <gazebo reference="${prefix}square_base_link">
+            <material>ArucoVisualMarker${marker_id}/Marker</material>
+            <turnGravityOff>true</turnGravityOff>
+        </gazebo>
+
+        <gazebo reference="${prefix}paper_base_link">
+            <material>ArucoMarkerPaperColor/White</material>
+        </gazebo>
+    </xacro:macro>
+</robot>

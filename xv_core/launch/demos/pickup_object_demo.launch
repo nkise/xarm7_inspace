@@ -1,0 +1,5 @@
+<launch>
+    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find xv_core)/config/logging.config"/>
+
+    <node pkg="xv_core" type="pickup_object_demo" name="pickup_object_demo" output="screen"/>
+</launch>

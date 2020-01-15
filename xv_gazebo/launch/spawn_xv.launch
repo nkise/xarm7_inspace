@@ -1,0 +1,12 @@
+<launch>
+    <include file="$(find xv_description)/launch/xv.launch"/>
+
+    <node name="spawn_xv"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-urdf -param robot_description -model xv
+                   -z 0.0 -y 0.0 -x 0.0
+                   -J xv_arm_joint4 3.14"
+          respawn="false"
+          output="screen"/>
+</launch>

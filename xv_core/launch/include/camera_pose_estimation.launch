@@ -1,0 +1,7 @@
+<launch>
+    <arg name="config_file_path"/>
+
+    <node pkg="xv_core" type="camera_pose_estimation_node" name="camera_pose_estimation_node" output="screen">
+        <rosparam command="load" file="$(arg config_file_path)"/>
+    </node>
+</launch>

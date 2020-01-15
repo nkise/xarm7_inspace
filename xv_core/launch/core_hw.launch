@@ -1,0 +1,20 @@
+<launch>
+    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find xv_core)/config/logging.config"/>
+
+    <include file="$(find xv_core)/launch/include/aruco.launch">
+        <arg name="camera_image_topic" value="/kinect2/hd/image_color"/>
+        <arg name="camera_info_topic" value="/kinect2/hd/camera_info"/>
+    </include>
+
+    <include file="$(find xv_core)/launch/include/camera_pose_estimation.launch">
+        <arg name="config_file_path" value="$(find xv_core)/config/camera_pose_estimation_hw.yaml"/>
+    </include>
+
+    <include file="$(find xv_core)/launch/include/pcl.launch">
+        <arg name="input_point_cloud_topic" value="/kinect2/hd/points"/>
+    </include>
+
+    <include file="$(find xv_core)/launch/include/object_detection.launch">
+        <arg name="input_point_cloud_topic" value="/pcl_voxel_grid/output"/>
+    </include>
+</launch>

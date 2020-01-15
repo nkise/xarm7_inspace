@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="xv_arm">
+    <xacro:include filename="$(find xarm_description)/urdf/common.gazebo.xacro"/>
+    <xacro:include filename="$(find xarm_description)/urdf/xarm7.urdf.xacro"/>
+    <xacro:include filename="$(find xarm_description)/urdf/xarm7.transmission.xacro"/>
+    <xacro:include filename="$(find xarm_description)/urdf/xarm7.gazebo.xacro"/>
+
+    <xacro:macro name="arm" params="prefix:=''">
+        <link name="${prefix}base_link"/>
+
+        <xacro:xarm7_urdf prefix="${prefix}"/>
+        <joint name="${prefix}world_joint" type="fixed">
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}link_base"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:gazebo_ros_control_plugin namespace=""/>
+        <xacro:xarm7_transmission prefix="${prefix}" hard_interface="PositionJointInterface"/>
+        <xacro:xarm7_gazebo prefix="${prefix}"/>
+    </xacro:macro>
+</robot>
