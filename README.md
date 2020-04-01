@@ -1,7 +1,8 @@
 # xarm_vrep
 
 ## Install
-
+Install Nvidia GPU support for Docker
+(https://github.com/NVIDIA/nvidia-docker)
 Init workspace
 
 ```bash
